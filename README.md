@@ -25,3 +25,12 @@ Requires Java 21 and Maven >3.8.8 to be in your PATH
 
 - DB can be accessed via `localhost:9001/h2-console`
 - Swagger can be accessed via `localhost:90001/swagger/ui`
+
+
+## Case 2
+
+### Sequence Diagram
+
+![Sequence Diagram](Case2_Sequence_Diagram.png)
+
+![Flowchart](Case2_FlowChart.png)

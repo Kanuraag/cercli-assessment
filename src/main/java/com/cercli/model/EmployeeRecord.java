@@ -6,11 +6,12 @@ import java.time.ZonedDateTime;
 
 /**
  * EmployeeRecord class which acts as Input and Output to controller and service methods.
- * While creating and updating object id, createdAt and ModifiedAt are not required as they are
- * automatically derived.
+ * While creating and updating object id, createdAt and ModifiedAt are not required as
+ * they are automatically derived.
  *
- * Validate that name cannot be blank
- * Validate email to be in proper format, otherwise raise an exception.
+ * Validate that name cannot be blank Validate email to be in proper format, otherwise
+ * raise an exception.
+ *
  * @param id
  * @param name
  * @param position
@@ -21,7 +22,7 @@ import java.time.ZonedDateTime;
  */
 
 public record EmployeeRecord(String id, String name, String position, String email, Double salary,
-		ZonedDateTime createdAt, ZonedDateTime modifiedAt) {
+		ZonedDateTime createdAt, ZonedDateTime modifiedAt, int version) {
 
 	public EmployeeRecord {
 		if (name.isBlank())

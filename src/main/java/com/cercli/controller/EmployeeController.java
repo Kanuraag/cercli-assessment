@@ -32,8 +32,10 @@ public class EmployeeController {
 	public ResponseEntity<EmployeeRecord> addEmployee(@RequestBody EmployeeRecord employeeRecord, TimeZone timeZone) {
 		ResponseEntity response = null;
 		try {
-			response = ResponseEntity.status(HttpStatus.CREATED).body(employeeService.addEmployee(employeeRecord, timeZone));
-		}catch(Exception e){
+			response = ResponseEntity.status(HttpStatus.CREATED)
+				.body(employeeService.addEmployee(employeeRecord, timeZone));
+		}
+		catch (Exception e) {
 			log.error(e.getMessage());
 			response = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
@@ -41,7 +43,8 @@ public class EmployeeController {
 	}
 
 	/**
-	 * A PUT operation to update employee object if provided id is found otherwise return 404
+	 * A PUT operation to update employee object if provided id is found otherwise return
+	 * 404
 	 * @param employeeId
 	 * @param employeeRecord
 	 * @param timeZone
@@ -49,12 +52,13 @@ public class EmployeeController {
 	 */
 
 	@PutMapping("/employee/{id}")
-	public ResponseEntity<EmployeeRecord> updateEmployee(@PathVariable("id") String employeeId, @RequestBody EmployeeRecord employeeRecord,
-			TimeZone timeZone) {
+	public ResponseEntity<EmployeeRecord> updateEmployee(@PathVariable("id") String employeeId,
+			@RequestBody EmployeeRecord employeeRecord, TimeZone timeZone) {
 		ResponseEntity response = null;
 		try {
 			response = ResponseEntity.ok(employeeService.updateEmployee(employeeRecord, employeeId, timeZone));
-		}catch(Exception e){
+		}
+		catch (Exception e) {
 			log.error(e.getMessage());
 			response = ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
 		}
@@ -73,7 +77,8 @@ public class EmployeeController {
 		ResponseEntity response = null;
 		try {
 			return ResponseEntity.ok(employeeService.getEmployeeById(employeeId, timeZone));
-		}catch(Exception e){
+		}
+		catch (Exception e) {
 			log.error(e.getMessage());
 			response = ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
 		}
@@ -88,6 +93,21 @@ public class EmployeeController {
 	@GetMapping("/employee")
 	public ResponseEntity<List<EmployeeRecord>> getEmployees(TimeZone timeZone) {
 		return ResponseEntity.ok(employeeService.getAllEmployees(timeZone));
+	}
+
+	@GetMapping("/employee/{id}/history")
+	public ResponseEntity<List<EmployeeRecord>> getEmployeeChangeHistory(@PathVariable("id") String employeeId,
+			TimeZone timeZone) {
+
+		ResponseEntity response = null;
+		try {
+			return ResponseEntity.ok(employeeService.getAllRevision(employeeId, timeZone));
+		}
+		catch (Exception e) {
+			log.error(e.getMessage());
+			response = ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+		}
+		return response;
 	}
 
 }

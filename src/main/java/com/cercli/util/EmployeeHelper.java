@@ -7,6 +7,9 @@ import java.time.OffsetDateTime;
 import java.time.ZonedDateTime;
 import java.util.TimeZone;
 
+/**
+ * Utility class to represent date time in local zone as per the user
+ */
 public class EmployeeHelper {
 
 	public static ZonedDateTime getLocalDateTime(OffsetDateTime dateTime, TimeZone timeZone) {
@@ -15,11 +18,11 @@ public class EmployeeHelper {
 		return localZonedDateTime;
 	}
 
-	public static EmployeeRecord parseEmployee(Employee employee, TimeZone timeZone) {
+	public static EmployeeRecord parseEmployee(Employee employee, TimeZone timeZone, int version) {
 
 		return new EmployeeRecord(employee.getEmployee_id(), employee.getName(), employee.getPosition(),
 				employee.getEmail(), employee.getSalary(), getLocalDateTime(employee.getCreatedAt(), timeZone),
-				getLocalDateTime(employee.getModifiedAt(), timeZone));
+				getLocalDateTime(employee.getModifiedAt(), timeZone), version);
 	}
 
 }
